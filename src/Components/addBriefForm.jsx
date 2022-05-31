@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
+import RoomModal from "./roomModal";
 
 function AddBriefForm() {
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+
+  const labelsOfCheckBoxes = [
+    "Materials, Workmanship and Testing",
+    "Contract Administration",
+    "Condition of Contracts",
+    "Site Organization and Management",
+    "Construction",
+    "Safety Requirement",
+    "Regulations and Restructure",
+    "Maintenance and Protection",
+    "Others",
+  ];
 
   return (
     <div>
@@ -29,7 +44,7 @@ function AddBriefForm() {
         Back to Brief
       </button>
       <div className="bg-white rounded-sm w-full px-14 pt-16 pb-10">
-        <h2 className="text-lg mb-5">CONTACT INFO</h2>
+        <h2 className="font-bold mb-5">CONTACT INFO</h2>
         <div className="flex mb-5">
           <input
             className="border flex-grow rounded-sm outline-none px-3"
@@ -124,30 +139,118 @@ function AddBriefForm() {
         />
         <div className="w-full my-5 px-4">
           <p className="mb-2">Mailing Address</p>
-          <textarea
-            className="p-4 max-w-full resize w-full border-2 rounded-md"
-            name="address"
-            rows="4"
-            cols="10"
-          ></textarea>
+          <div className="flex">
+            <span className="border-2 border-r-0 rounded-l-md flex items-center px-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#3b82f6"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="10" r="3" />
+                <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
+              </svg>
+            </span>
+            <textarea
+              className="p-4 max-w-full resize w-full border-2 rounded-r-md outline-none"
+              name="address"
+              rows="3"
+              cols="10"
+            ></textarea>
+          </div>
         </div>
-        <h2 className="text-lg mb-5">PROJECT OVERVIEW</h2>
+        <h2 className="font-bold mb-5">PROJECT OVERVIEW</h2>
         <div>
           <p className="my-2 text-sm">
             PROJECT TITLE <span className="text-red-500">*</span>
           </p>
           <input
             type="text"
-            className="px-2 w-full rounded-sm bg-gray-200 border outline-none"
+            className="px-2 w-full rounded-sm bg-gray-200 border outline-none mb-2"
           />
-          <p className="my-2">address</p>
+          <p className="my-2">
+            LOCATION(provide property address and specific floors(s) / area(s)
+            if aplicable)<span className="text-red-500">*</span>
+          </p>
           <textarea
-            className="w-full max-w-full resize border outline-none rounded-sm p-4"
+            className="w-full max-w-full resize border outline-none rounded-sm px-4 py-2 mb-3"
             id=""
             cols="10"
-            rows="4"
+            rows="3"
+            placeholder="Enter Property Address"
           ></textarea>
+          <h2 className="font-bold">ROOMS</h2>
+          <p className="my-2 text-sm">
+            NUMBER OF ROOM(S)<span className="text-red-500">*</span>
+          </p>
+          <input
+            type="number"
+            className="w-full border-2 px-2 outline-none rounded-[4px]"
+            min={0}
+          />
+          <div className="grid grid-cols-3 mt-3 gap-3">
+            <div
+              onClick={() => setOpen(!open)}
+              className="border-2 rounded-md px-7 py-3 cursor-pointer"
+            >
+              <p className="text-blue-500">Master BedRoom +</p>
+            </div>
+            <div className="border-2 rounded-md px-7 py-3 cursor-pointer">
+              <p className="text-blue-500">Living Room +</p>
+            </div>
+            <div className="border-2 rounded-md px-7 py-3 cursor-pointer">
+              <p className="text-blue-500">gym Room +</p>
+            </div>
+            <div className="border-2 rounded-md px-7 py-3 cursor-pointer">
+              <p className="text-blue-500">Comman Area +</p>
+            </div>
+          </div>
+          <div className="mt-6">
+            <h2 className="font-bold">PRELIMINARIES</h2>
+            <div className="flex flex-wrap">
+              {labelsOfCheckBoxes.map((label, i) => (
+                <div key={i}>
+                  <Input type="checkbox" label={label} id={label} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <h2 className="font-bold mt-4">ESTIMATED BUDGET</h2>
+          <p className="my-2 text-sm">
+            What is your estimated budget for this project ?
+          </p>
+          <input
+            type="text"
+            className="w-full border-2 px-2 outline-none rounded-[4px]"
+          />
+          <h2 className="font-bold mt-4">REMARKS</h2>
+          <p className="my-2 text-sm">
+            include any additional critical information
+          </p>
+          <textarea
+            type="text"
+            className="resize w-full border-2 px-2 outline-none rounded-[4px]"
+            cols="10"
+            rows="3"
+          ></textarea>
+          <div className="my-2">
+            <h2 className="font-bold my-2">UPLOAD EXTRA FILES</h2>
+            <div className="border-2 p-5 max-w-[180px] border-blue-500 border-dashed">
+              <span className="text-2xl text-blue-500 flex justify-center items-center">
+                +
+              </span>
+            </div>
+          </div>
+          <button className="text-white bg-blue-500 rounded-sm border-0 outline-none mt-3 px-4 py-2">
+            Submit
+          </button>
         </div>
+        {open && <RoomModal setOpen={setOpen} open={open} />}
       </div>
     </div>
   );
