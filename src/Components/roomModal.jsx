@@ -32,6 +32,15 @@ function RoomModal({ setOpen, open }) {
     "MUSIC",
   ];
 
+  const roomArea = [
+    "DEMOLITION",
+    "WALL",
+    "FLOOR",
+    "CEILING",
+    "WINDOW",
+    "ELECTRICAL FITTINGS",
+  ];
+
   return (
     <>
       <div className="z-20 lg:p-0 p-6 fixed inset-0 bg-black/50 w-full h-full flex justify-center items-start overflow-y-auto">
@@ -113,12 +122,30 @@ function RoomModal({ setOpen, open }) {
                 </div>
               ))}
             </div>
+            <div className="w-full">
+              <input className="mt-12" type="checkbox" id="chk1" />
+              <label className="text-blue-400 ml-1" for="chk1">
+                Does this room require additional work to be done?
+              </label>
+              <div className="w-full mt-1">
+                <h2 className="font-bold">ROOM AREA</h2>
+                {roomArea.map((room, index) => (
+                  <div className="flex mt-4 gap-2 items-center">
+                    <input type="checkbox" id={`roomArea${index}`} />
+                    <label for={`roomArea${index}`}>{room}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
           </form>
           <div className="flex justify-center items-center w-full space-x-4 mt-10">
             <button className="px-8 py-2 text-center text-sm bg-[#288CFF] text-white font-medium rounded shadow">
               Confirm Booking
             </button>
-            <button className="px-8 py-2 text-center text-sm bg-[#288CFF]/30 text-gray-900 font-medium rounded shadow">
+            <button
+              onClick={() => setOpen(false)}
+              className="px-8 py-2 text-center text-sm bg-[#288CFF]/30 text-gray-900 font-medium rounded shadow"
+            >
               Cancel
             </button>
           </div>

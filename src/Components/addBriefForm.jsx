@@ -200,13 +200,22 @@ function AddBriefForm() {
             >
               <p className="text-blue-500">Master BedRoom +</p>
             </div>
-            <div className="border-2 rounded-md px-7 py-3 cursor-pointer">
+            <div
+              onClick={() => setOpen(!open)}
+              className="border-2 rounded-md px-7 py-3 cursor-pointer"
+            >
               <p className="text-blue-500">Living Room +</p>
             </div>
-            <div className="border-2 rounded-md px-7 py-3 cursor-pointer">
+            <div
+              onClick={() => setOpen(!open)}
+              className="border-2 rounded-md px-7 py-3 cursor-pointer"
+            >
               <p className="text-blue-500">gym Room +</p>
             </div>
-            <div className="border-2 rounded-md px-7 py-3 cursor-pointer">
+            <div
+              onClick={() => setOpen(!open)}
+              className="border-2 rounded-md px-7 py-3 cursor-pointer"
+            >
               <p className="text-blue-500">Comman Area +</p>
             </div>
           </div>
